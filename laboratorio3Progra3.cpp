@@ -6,19 +6,102 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+int partida(int);
+void ordenar(int[], int,int);
+void writeArray(int[], int);
 
 int main(int argc, char*argv[]){
 bool jugar = true;
-bool seguir = true;
+bool menu = true;
+int decision=0;
 srand(time(NULL));
-int contador=0;
 int numero = 0;
-int intento = 0;
+const int SIZE= 10;
+int score[SIZE]={0,0,0,0,0,0,0,0,0,0};
+char opcion;
 
-//while(jugar ==true){
+while(menu==true){
+	cout<<"Seleccione lo que desea hacer: "<<endl<<
+	"1. Ejercicio 1"<<endl<<
+	"2. Ejercicio 2 "<<endl<<
+	"3. Salir"<<endl;
+	cin>>decision;
+
+	if(decision==1){
+
+		while(jugar ==true){
+			numero  = -500 + rand()%(501+500);
+        		cout<<numero<<endl;
+			cout<<"Adivine el numero secreto: "<<endl;
+
 	
-//}
-numero  = -500 + rand()%(501+500);
-        cout<<numero<<endl;
+			ordenar(score,partida(numero), SIZE);
+			writeArray(score,SIZE);
+
+			cout<<"Desea seguir jugando? s/n"<<endl;
+			cout<<"Al salir la tabla de scores se borra."<<endl;
+			cin>>opcion;
+
+			if(opcion=='s'){
+				jugar=true;
+	
+			}else{
+				jugar=false;
+		
+			}		
+		}
+	}else if(decision==2){
+		
+	}else if(decision==3){
+		exit(1);
+	}
+}
 return 0;
+}
+
+int partida(int num){
+bool seguir=true;
+int intento= 0;
+int contador=0;
+
+while(seguir==true){
+                cout<<"Ingrese un numero: "<<endl;
+                cin>>intento;
+
+		if(intento>num){
+			cout<<"El numero es mayor. "<<endl;
+			contador++;
+		}else if(intento<num){
+			cout<<"El numero es menor."<<endl;
+			contador++;
+		}else if(intento==num){
+			cout<<"Felicidades, has adivinado!"<<endl;
+			contador++;
+			seguir=false;
+		}
+        }
+return contador;
+}
+
+void ordenar(int numeros[],int x, int l){
+	int parametro=x;
+	int temporal;
+	for(int i = l-1; i>=0;i--){
+		if(numeros[i]<parametro&&parametro!=0){
+			temporal = numeros[i];
+			numeros[i]=parametro;
+			parametro = temporal;	
+		}else if(numeros[i]>parametro&&parametro!=0){
+			numeros[i]=numeros[i];
+			parametro=parametro;
+		}
+	}	
+	
+}
+
+void writeArray(int lista[], int m){
+	cout<<"-------------------High Scores-----------------------"<<endl;
+	for(int i = 0; i<m; i++){
+		cout<<i+1<<".   "<<lista[i]<<endl;
+	}
 }
