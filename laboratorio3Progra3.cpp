@@ -21,7 +21,7 @@ const int SIZE= 10;
 int score[SIZE]={0,0,0,0,0,0,0,0,0,0};
 char opcion;
 int valoresMatriz[4][3];
-int ataque1, ataque2, defensa1,defensa2,speed1,speed2;
+int ataque1, ataque2, defensa1,defensa2,speed1,speed2,life1,life2;
 
 while(menu==true){
 	cout<<"Seleccione lo que desea hacer: "<<endl<<
@@ -74,17 +74,34 @@ while(menu==true){
 		cout<<endl;
         }
 
-	ataque1 = valoresMatriz[0+rand()%(5-0)][0];
-	ataque2 = valoresMatriz[0+rand()%(5-0)][0];
-	defensa1 = valoresMatriz[0+rand()%(5-0)][1];
-	defensa2 = valoresMatriz[0+rand()%(5-0)][1];
-	speed1 = valoresMatriz[0+rand()%(5-0)][2];
-	speed2 = valoresMatriz[0+rand()%(5-0)][2];
+	ataque1 = valoresMatriz[0+rand()%(4-0)][0];
+	ataque2 = valoresMatriz[0+rand()%(4-0)][0];
+	defensa1 = valoresMatriz[0+rand()%(4-0)][1];
+	defensa2 = valoresMatriz[0+rand()%(4-0)][1];
+	speed1 = valoresMatriz[0+rand()%(4-0)][2];
+	speed2 = valoresMatriz[0+rand()%(4-0)][2];
 
 	cout<<"Jugador 1: "<<"Ataque "<<ataque1<<" Defensa "<<defensa1<<" Velocidad "<<speed1<<"."<<endl;
 	cout<<"Jugador 2: "<<"Ataque "<<ataque2<<" Defensa "<<defensa2<<" Velocidad "<<speed2<<"."<<endl;	
 	
-	
+	life1=ataque1-defensa2;
+	life2=ataque2-defensa1;
+
+	if(life1>life2){
+		cout<<"Jugador 1, gano por "<<life1-life2<<" puntos de diferencia, no gano por velocidad"<<endl;
+	}else if(life1<life2){
+		cout<<"Jugador 2, gano por "<<life2-life1<<" puntos de diferencia, no gano por velocidad"<<endl;
+	}else if(life1==life2){
+		if(speed1>speed2){
+			life2=life2-speed1;
+			cout<<"JUgador 1, gano por "<<life1-life2<<" puntos de diferencia, GANO POR VELOCIDAD"<<endl;
+		}else if(speed1<speed2){
+			life1=life1-speed2;
+			cout<<"Jugador 2, gano por "<<life2-life1<<" puntos de diferencia, GANO POR VELOCIDAD"<<endl;
+		}else if(speed1==speed2){
+			cout<<"La partida ha terminado en empate, ambos jugadores con "<<life1<<" puntos"<<endl;
+		}
+	}	
 	}else if(decision==3){
 		exit(1);
 	}
