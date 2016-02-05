@@ -10,6 +10,7 @@ int partida(int);
 void ordenar(int[], int,int);
 void writeArray(int[], int);
 
+
 int main(int argc, char*argv[]){
 bool jugar = true;
 bool menu = true;
@@ -19,6 +20,8 @@ int numero = 0;
 const int SIZE= 10;
 int score[SIZE]={0,0,0,0,0,0,0,0,0,0};
 char opcion;
+int valoresMatriz[4][3];
+int ataque1, ataque2, defensa1,defensa2,speed1,speed2;
 
 while(menu==true){
 	cout<<"Seleccione lo que desea hacer: "<<endl<<
@@ -51,7 +54,37 @@ while(menu==true){
 			}		
 		}
 	}else if(decision==2){
-		
+		for(int i = 0; i<4;i++){
+			for(int j = 0; j<3;j++){
+				if(j==0){
+					valoresMatriz[i][j]=85+rand()%(116-85);
+				}else if(j==1){
+					valoresMatriz[i][j]=50+rand()%(76-50);
+				}else if(j==2){
+					valoresMatriz[i][j]=150+rand()%(201-150);	
+				}
+			}
+		}			
+	cout<<"Ataque           Defensa         Velocidad"<<endl;
+
+        for(int i=0;i<4;i++){
+                for(int j = 0;j<3;j++){
+                        cout<<valoresMatriz[i][j]<<"                  ";
+                }
+		cout<<endl;
+        }
+
+	ataque1 = valoresMatriz[0+rand()%(5-0)][0];
+	ataque2 = valoresMatriz[0+rand()%(5-0)][0];
+	defensa1 = valoresMatriz[0+rand()%(5-0)][1];
+	defensa2 = valoresMatriz[0+rand()%(5-0)][1];
+	speed1 = valoresMatriz[0+rand()%(5-0)][2];
+	speed2 = valoresMatriz[0+rand()%(5-0)][2];
+
+	cout<<"Jugador 1: "<<"Ataque "<<ataque1<<" Defensa "<<defensa1<<" Velocidad "<<speed1<<"."<<endl;
+	cout<<"Jugador 2: "<<"Ataque "<<ataque2<<" Defensa "<<defensa2<<" Velocidad "<<speed2<<"."<<endl;	
+	
+	
 	}else if(decision==3){
 		exit(1);
 	}
@@ -95,7 +128,9 @@ void ordenar(int numeros[],int x, int l){
 			numeros[i]=numeros[i];
 			parametro=parametro;
 		}
-	}	
+	}
+
+		
 	
 }
 
@@ -105,3 +140,5 @@ void writeArray(int lista[], int m){
 		cout<<i+1<<".   "<<lista[i]<<endl;
 	}
 }
+
+
